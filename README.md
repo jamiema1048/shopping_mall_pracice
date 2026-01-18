@@ -82,3 +82,13 @@ export default defineConfig([
 - ProductPage /xxx
 - CartPage /cart
 - CheckoutPage /checkout
+
+## Required
+
+- react-router-dom
+- styled-components
+- vite
+- tailwindcss
+- vitest
+- antd
+- @ant-design/icons

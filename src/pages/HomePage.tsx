@@ -1,7 +1,9 @@
 import React from "react";
+import ClearFix from "@/components/common/ClearFix";
 const HomePage: React.FC = () => {
   return (
     <>
+      <ClearFix />
       <div>HomePage</div>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt commodi
