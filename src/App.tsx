@@ -13,10 +13,12 @@ import CheckoutPage from "./pages/CheckoutPage";
 import ProductCollectionPage from "./pages/ProductCollectionPage";
 import ProductPage from "./pages/ProductPage";
 import DefaultLayout from "./components/layout/DefaultLayout";
+import ScrollToTop from "./components/common/ScrollToTop";
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         <Route element={<DefaultLayout fixedHeader={true} />}>
           <Route path="/" element={<Navigate to="/mall" replace />} />

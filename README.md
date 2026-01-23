@@ -92,3 +92,8 @@ export default defineConfig([
 - vitest
 - antd
 - @ant-design/icons
+
+## To-do
+
+1. Banner image's bottom align problem had to fix
+2. Dots in the Carousel will lay on top of header when scroll down, fix it

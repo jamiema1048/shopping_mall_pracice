@@ -11,12 +11,13 @@ const PageHeader = styled.div`
     props.fixed &&
     css`
       position: fixed;
+      z-index: 10;
     `}
 `;
 
 const DefaultLayout = ({ fixedHeader }: DefaultLayoutProps) => {
   return (
-    <div>
+    <div style={{ width: "100vw" }}>
       <PageHeader fixed={fixedHeader}>
         <Header />
       </PageHeader>

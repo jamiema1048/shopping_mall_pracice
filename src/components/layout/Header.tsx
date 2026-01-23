@@ -10,6 +10,7 @@ const Styledheader = styled.header`
   background-color: #d1011c;
   width: 100vw;
   padding: 16px 0;
+  z-index: 2000;
 `;
 
 const StyledHeaderSection = styled.div`
