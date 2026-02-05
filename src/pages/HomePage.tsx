@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import ClearFix from "@/components/common/ClearFix";
 import ProductCard from "@/components/product/ProductCard";
+import AuthContext from "@/components/auth/AuthContext";
 import styled from "styled-components";
 import { Carousel } from "antd";
 import Banner01 from "@/images/banner/banner01.jpg";
@@ -101,9 +102,11 @@ const Image = styled.div`
 `;
 
 const HomePage: React.FC = () => {
+  const { isAuthenticated } = useContext(AuthContext);
   return (
     <>
       <ClearFix />
+      {isAuthenticated && <h1>歡迎回來</h1>}
       <BannerBox>
         <BannerImageArea>
           <BannerCarouselContainer>

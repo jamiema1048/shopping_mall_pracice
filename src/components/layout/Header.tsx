@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Container from "../common/Container";
+import AuthContext from "../auth/AuthContext";
 import Logo from "@/images/logo.png";
 import { Input } from "antd";
 import { ShoppingCartOutlined } from "@ant-design/icons";
@@ -50,7 +51,8 @@ type SearchProps = GetProps<typeof Input.Search>;
 const onSearch: SearchProps["onSearch"] = (value, _e, info) =>
   console.log(info?.source, value);
 
-const Header: React.FC = () => {
+const Header: React.FC = ({ className }) => {
+  const { isAuthenticated, logout } = useContext(AuthContext);
   return (
     <Styledheader>
       <Container>
@@ -64,7 +66,14 @@ const Header: React.FC = () => {
           <Toolbar>
             <Link to="#!">通知</Link>
             <Link to="#!">幫助中心</Link>
-            <Link to="#!">帳號</Link>
+            {isAuthenticated ? (
+              <div>
+                <Link to="#!">Aaron</Link>
+                <Link onClick={() => logout()}>登出</Link>
+              </div>
+            ) : (
+              <Link to="/login">登入/註冊</Link>
+            )}
           </Toolbar>
         </StyledHeaderSection>
         <StyledHeaderSection>
