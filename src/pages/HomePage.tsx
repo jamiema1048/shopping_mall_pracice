@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import ClearFix from "@/components/common/ClearFix";
 import ProductCard from "@/components/product/ProductCard";
 import AuthContext from "@/components/auth/AuthContext";
+import PopUpModal from "@/components/common/PopUpModal";
 import styled from "styled-components";
 import { Carousel } from "antd";
 import Banner01 from "@/images/banner/banner01.jpg";
@@ -105,6 +106,7 @@ const HomePage: React.FC = () => {
   const { isAuthenticated } = useContext(AuthContext);
   return (
     <>
+      <PopUpModal />
       <ClearFix />
       {isAuthenticated && <h1>歡迎回來</h1>}
       <BannerBox>
