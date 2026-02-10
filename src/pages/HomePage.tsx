@@ -31,6 +31,11 @@ const BannerCarouselContainer = styled.div`
   @media (min-width: 769px) {
     width: 66.67%;
   }
+  .ant-carousel {
+    .slick-dots {
+      z-index: 1; /* 降低到 1，只要高於背景圖即可，但低於 Header */
+    }
+  }
 `;
 
 const BannerSectionContainer = styled.div`
