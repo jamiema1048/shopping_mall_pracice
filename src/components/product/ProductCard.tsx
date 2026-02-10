@@ -21,21 +21,23 @@ const SalePricesLabel = styled.span`
 `;
 
 const { Meta } = Card;
-const ProductCard: React.FC = ({
+const ProductCard: React.FC<ProductCardProps> = ({
   coverUrl,
   title,
   listPrices,
   salePrices,
   discountPercentage,
-  salesNumber,
-  rating,
-  isLiked,
-}: ProductCardProps) => {
+}) => {
+  const getImageUrl = (path: string) => {
+    // 這裡需要根據你的檔案結構調整相對位置
+    return new URL(path, import.meta.url).href;
+  };
+  console.log(coverUrl);
   return (
     <Card
       hoverable
       style={{ width: "100%" }}
-      cover={<SquareImage url={coverUrl} />}
+      cover={<SquareImage url={coverUrl} alt={title} />}
     >
       <Meta
         title={title}

@@ -6,6 +6,8 @@ import AuthContext from "@/components/auth/AuthContext";
 import PopUpModal from "@/components/common/PopUpModal";
 import styled from "styled-components";
 import { Carousel } from "antd";
+import type { ProductData } from "@/types/productsData";
+import products from "../../database/db.json";
 import Banner01 from "@/images/banner/banner01.jpg";
 import Banner02 from "@/images/banner/banner02.jpg";
 import Banner03 from "@/images/banner/banner03.jpg";
@@ -104,6 +106,39 @@ const Image = styled.div`
 
 const HomePage: React.FC = () => {
   const { isAuthenticated } = useContext(AuthContext);
+  const renderProductContainer = () => {
+    // 1. 確保取到的是 JSON 裡的陣列 (假設 db.json 結構是 { "products": [...] })
+    const productList = products.products;
+
+    return (
+      <ProductCollectionContainer>
+        {/* 2. 修正參數型別為單個 ProductData */}
+        {productList.map((product: ProductData) => {
+          const imageUrl = new URL(product.coverUrl, import.meta.url).href;
+          return (
+            <ProductContainer key={product.id}>
+              <Link to={product.listLink}>
+                <ProductCard
+                  title={product.title}
+                  coverUrl={imageUrl}
+                  salePrices={product.salePrices}
+                  listPrices={product.listPrices}
+                  discountPercentage={
+                    // 3. 安全處理：防止 listPrices 為空導致 NaN 或除以 0
+                    product.listPrices
+                      ? Math.floor(
+                          (product.salePrices / product.listPrices) * 100,
+                        )
+                      : 0
+                  }
+                />
+              </Link>
+            </ProductContainer>
+          );
+        })}
+      </ProductCollectionContainer>
+    );
+  };
   return (
     <>
       <PopUpModal />
@@ -151,63 +186,7 @@ const HomePage: React.FC = () => {
           <GuangGaoImage height={100} url={Banner01} />
         </Link>
       </GuangGaoContainer>
-      <ProductCollectionContainer>
-        <ProductContainer>
-          <Link to="/p001">
-            <ProductCard
-              title="01"
-              coverUrl={Banner01}
-              salePrices={100}
-              listPrices={200}
-            />
-          </Link>
-        </ProductContainer>
-        <ProductContainer>
-          <Link to="/p002">
-            <ProductCard
-              title="02"
-              coverUrl={Banner02}
-              salePrices={100}
-              listPrices={200}
-            />
-          </Link>
-        </ProductContainer>
-        <ProductContainer>
-          <Link to="/p003">
-            <ProductCard title="03" coverUrl={Banner03} salePrices={100} />
-          </Link>
-        </ProductContainer>
-        <ProductContainer>
-          <Link to="/p004">
-            <ProductCard
-              title="04"
-              coverUrl={Banner04}
-              salePrices={100}
-              listPrices={200}
-            />
-          </Link>
-        </ProductContainer>
-        <ProductContainer>
-          <Link to="/p005">
-            <ProductCard
-              title="05"
-              coverUrl={Banner01}
-              salePrices={100}
-              listPrices={200}
-            />
-          </Link>
-        </ProductContainer>
-        <ProductContainer>
-          <Link to="/p006">
-            <ProductCard
-              title="06"
-              coverUrl={Banner02}
-              salePrices={100}
-              listPrices={200}
-            />
-          </Link>
-        </ProductContainer>
-      </ProductCollectionContainer>
+      {renderProductContainer()}
       <h3>花得更少買得更好，全新網路購物網站體驗</h3>
       <p>
         蝦皮購物是台灣首屈一指的電商平台，多樣購物網站服務包括蝦皮商城、蝦皮特選、蝦皮直送、蝦皮超市等，更陸續設立蝦皮店到店，並提供蝦皮店到店隔日到貨及蝦皮店到家宅配等多種取貨選擇，服務更升級！簡易操作介面、清楚的商品評價讓你輕鬆選好物。在蝦皮下單後，透過訂單詳情可以隨時進行包裹查詢，無需擔心收不到你所訂購的商品！而在商品鑑賞期期間，蝦皮安心退讓你一鍵就能申請退貨，購物不再怕踩雷，盡情享受「放心買、安心退」的絕佳購物環境！蝦皮更承諾保障你的交易安全，提供多種安全可靠的付款方式，街口支付等行動支付超方便！趕快到蝦皮購物享受蝦皮免運吃到飽，開啟全新的購物網站體驗！
