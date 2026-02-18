@@ -95,5 +95,6 @@ export default defineConfig([
 
 ## To-do
 
-1. Banner image's bottom align problem had to fix
-2. Dots in the Carousel will lay on top of header when scroll down, fix it
+1. Add Loading and null state
+2. Add Google Auth
+3. Add test files
